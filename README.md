@@ -2,6 +2,7 @@
 
 ## 개요
 React와 Tailwind CSS로 구현한 심플한 방명록 서비스입니다. 별도의 백엔드 없이 클라이언트 상태만으로 동작하며, 누구나 쉽게 닉네임과 한 줄 메시지를 남길 수 있습니다.
+
 <p align="center">
 <img width="635" height="661" alt="Image" src="https://github.com/user-attachments/assets/49486ac8-c271-454c-a4e0-630844ac34e1" />
 </p>
@@ -48,13 +49,15 @@ Ubuntu 리눅스 서버에서 실행, 워크플로우가 시작될 때 생성되
 runs-on: ubuntu-latest
 ```
 ## 실행 순서
-1. Checkout source code
+1. Checkout source code  
+
 GitHub 레포지토리의 코드를 Ubuntu 서버로 가져옴.
 ```yml
 uses: actions/checkout@v4
 ```
 2. Set up Node.js
-Node.js 18을 설치
+Node.js 18을 설치  
+
 cache: npm으로 node_modules를 캐싱해서 다음 실행부터 설치 속도 빨라짐.
 ```yml
 uses: actions/setup-node@v4
@@ -62,17 +65,20 @@ with:
   node-version: 18
   cache: npm
 ```
-3. Install dependencies
+3. Install dependencies  
+
 package.json을 기준으로 의존성 패키지를 설치
 ```yml
 run: npm install
 ```
-4. Build
+4. Build  
+
 React 앱 빌드
 ```yml
 run: npm run build
 ```
-5. Configure AWS credentials
+5. Configure AWS credentials  
+
 GitHub Secrets에 저장된 AWS 자격증명으로 인증
 ```yml
 uses: aws-actions/configure-aws-credentials@v4
@@ -82,9 +88,12 @@ with:
   aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
   aws-region: us-east-1
 ```
-6. Deploy to S3
-빌드된 build/ 폴더를 S3 버킷에 업로드
---delete로 S3에만 남아있는 불필요한 파일을 자동 삭제
+6. Deploy to S3  
+
+빌드된 build/ 폴더를 S3 버킷에 업로드  
+
+--delete로 S3에만 남아있는 불필요한 파일을 자동 삭제  
+
 git과 .github 폴더는 업로드 대상에서 제외
 ```yml
 run: |
@@ -94,7 +103,14 @@ run: |
 ```
 
 # AWS url
+## 과제 1) Github Actions를 활용하여 CI/CD 환경 구축
 <http://dmu-guestbook.s3-website-us-east-1.amazonaws.com>
+## 과제 2) AWS Amplify 서비스를 활용하여 호스팅하기
+<https://main.d21uyp5ra5ovrt.amplifyapp.com>
+  
 
 # youtube link
+## 과제 1) Github Actions를 활용하여 CI/CD 환경 구축
 <https://youtu.be/JHPprcujumI>
+## 과제 2) AWS Amplify 서비스를 활용하여 호스팅하기
+<https://youtu.be/diAc1-2ka4k>
